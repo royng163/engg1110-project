@@ -85,7 +85,27 @@ void printTwoGameBoards(int gameBoard1[3][3], int gameBoard2[3][3]) {
 int isGameBoardDead(int gameBoard[3][3]){
 
     // TODO: Complete this part
+    for (int i = 0; i < 3; i++){
+        // Checks rows
+        if (gameBoard[i][0] == gameBoard[i][1] == gameBoard[i][2]){
+            return 1;
+        }
+        
+        // Checks columns
+        if (gameBoard[0][i] == gameBoard[1][i] == gameBoard[2][i]){
+            return 1;
+        }
+    }
 
+    // Checks diagonals
+    if (gameBoard[0][0] == gameBoard[1][1] == gameBoard[2][2]){
+        return 1;
+    }
+    if (gameBoard[0][2] == gameBoard[1][1] == gameBoard[2][0]){
+        return 1;
+    }
+
+    return 0;
 }
 
 
@@ -151,8 +171,8 @@ int main()
     /* Uncomment the following statements to test whether the printTwoGameBoards() and the placeCrossByHumanPlayer() functions are implemented correctly.
        You can add more if you wish.
        After testing, you can delete them or move them elsewhere. */
-    printTwoGameBoards(gameBoard1, gameBoard2);
-    printf("# Player 1's turn #\n");
+    // printTwoGameBoards(gameBoard1, gameBoard2);
+    // printf("# Player 1's turn #\n");
     // placeCrossByHumanPlayer(gameBoard1, gameBoard2);
     // printTwoGameBoards(gameBoard1, gameBoard2);
     // printf("# Player 2's turn #\n");
@@ -166,6 +186,7 @@ int main()
        Hint: use a while loop */
 
     // TODO: Complete this part
+
 
     return 0;
 }
