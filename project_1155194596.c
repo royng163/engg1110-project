@@ -186,6 +186,16 @@ int main()
        Hint: use a while loop */
 
     // TODO: Complete this part
+    if (numOfHumanPlayers == 2){
+        while (!isGameBoardDead){
+            printTwoGameBoards(gameBoard1, gameBoard2);
+            printf("# Player 1's turn #\n");
+            placeCrossByHumanPlayer(gameBoard1, gameBoard2);
+        }
+
+    }else if (numOfHumanPlayers == 1){
+
+    }
 
 
     return 0;
