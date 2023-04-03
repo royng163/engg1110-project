@@ -1,0 +1,138 @@
+Enter the number of human players [1-2]:
+1
+
+# Game Board 1 #
+|7|8|9|
+|4|5|6|
+|1|2|3|
+# Game Board 2 #
+|7|8|9|
+|4|5|6|
+|1|2|3|
+# Player 1's turn #
+Choose the game board:
+1
+Choose the cell:
+1
+
+# Game Board 1 #
+|7|8|9|
+|4|5|6|
+|X|2|3|
+# Game Board 2 #
+|7|8|9|
+|4|5|6|
+|1|2|3|
+# Computer's turn #
+Choose the game board:
+2
+Choose the cell:
+9
+
+# Game Board 1 #
+|7|8|9|
+|4|5|6|
+|X|2|3|
+# Game Board 2 #
+|7|8|X|
+|4|5|6|
+|1|2|3|
+# Player 1's turn #
+Choose the game board:
+2
+Choose the cell:
+8
+
+# Game Board 1 #
+|7|8|9|
+|4|5|6|
+|X|2|3|
+# Game Board 2 #
+|7|X|X|
+|4|5|6|
+|1|2|3|
+# Computer's turn #
+Choose the game board:
+1
+Choose the cell:
+2
+
+# Game Board 1 #
+|7|8|9|
+|4|5|6|
+|X|X|3|
+# Game Board 2 #
+|7|X|X|
+|4|5|6|
+|1|2|3|
+# Player 1's turn #
+Choose the game board:
+2
+Choose the cell:
+5
+
+# Game Board 1 #
+|7|8|9|
+|4|5|6|
+|X|X|3|
+# Game Board 2 #
+|7|X|X|
+|4|X|6|
+|1|2|3|
+# Computer's turn #
+Choose the game board:
+1
+Choose the cell:
+3
+
+# Game Board 1 #
+|7|8|9|
+|4|5|6|
+|X|X|X|
+# Game Board 2 #
+|7|X|X|
+|4|X|6|
+|1|2|3|
+# Player 1's turn #
+Choose the game board:
+2
+Choose the cell:
+4
+
+# Game Board 1 #
+|7|8|9|
+|4|5|6|
+|X|X|X|
+# Game Board 2 #
+|7|X|X|
+|X|X|6|
+|1|2|3|
+# Computer's turn #
+Choose the game board:
+2
+Choose the cell:
+3
+
+# Game Board 1 #
+|7|8|9|
+|4|5|6|
+|X|X|X|
+# Game Board 2 #
+|7|X|X|
+|X|X|6|
+|1|2|X|
+# Player 1's turn #
+Choose the game board:
+2
+Choose the cell:
+6
+
+# Game Board 1 #
+|7|8|9|
+|4|5|6|
+|X|X|X|
+# Game Board 2 #
+|7|X|X|
+|X|X|X|
+|1|2|X|
+Computer wins!
