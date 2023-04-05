@@ -56,14 +56,14 @@ void printGameBoard(int gameBoard[3][3]) {
     for (int i = 2; i >= 0; i--){
         for (int j = 0; j < 3; j++){
 
-            if (gameBoard[i][j] == 0){
-                printf("|x|");
+            if (gameBoard[i][j] == -1){
+                printf("|x");
             }else {
-                printf("|%d|", gameBoard[i][j]);
+                printf("|%d", gameBoard[i][j]);
             }
 
         }
-        printf("\n");
+        printf("|\n");
     }
 }
 
@@ -87,21 +87,21 @@ int isGameBoardDead(int gameBoard[3][3]){
     // TODO: Complete this part
     for (int i = 0; i < 3; i++){
         // Checks rows
-        if (gameBoard[i][0] == gameBoard[i][1] == gameBoard[i][2]){
+        if (gameBoard[i][0] == gameBoard[i][1] && gameBoard[i][1] == gameBoard[i][2]){
             return 1;
         }
         
         // Checks columns
-        if (gameBoard[0][i] == gameBoard[1][i] == gameBoard[2][i]){
+        if (gameBoard[0][i] == gameBoard[1][i] && gameBoard[1][i] == gameBoard[2][i]){
             return 1;
         }
     }
 
     // Checks diagonals
-    if (gameBoard[0][0] == gameBoard[1][1] == gameBoard[2][2]){
+    if (gameBoard[0][0] == gameBoard[1][1] && gameBoard[1][1] == gameBoard[2][2]){
         return 1;
     }
-    if (gameBoard[0][2] == gameBoard[1][1] == gameBoard[2][0]){
+    if (gameBoard[0][2] == gameBoard[1][1] && gameBoard[1][1] == gameBoard[2][0]){
         return 1;
     }
 
@@ -115,6 +115,27 @@ int isGameBoardDead(int gameBoard[3][3]){
 void updateGameBoard(int gameBoard[3][3]) {
 
     // TODO: Complete this part
+    int choice;
+
+    printf("Choose the cell:\n");
+    
+    while (1){
+       scanf("%d", &choice);
+
+        if (choice < 1 || choice > 9){
+            printf("Input out of range. Please input again:\n");
+            continue;
+        }
+
+        if (gameBoard[(choice-1)/3][(choice-1)%3] == -1){
+            printf("The chosen cell is occupied. Please input again:\n");
+            continue;
+        }else {
+            gameBoard[(choice-1)/3][(choice-1)%3] = -1;
+            break;
+        }
+
+    }
 
 }
 
@@ -125,6 +146,38 @@ void updateGameBoard(int gameBoard[3][3]) {
 void placeCrossByHumanPlayer(int gameBoard1[3][3], int gameBoard2[3][3]) {
 
     // TODO: Complete this part
+    int choice;
+
+    printf("Choose the game board:\n");
+
+    while (1){
+        scanf("%d", &choice);
+
+        if (choice < 1 || choice > 2){
+            printf("Input out of range. Please input again:\n");
+        }
+
+        if (choice == 1){
+            if (isGameBoardDead(gameBoard1)){
+                printf("The chosen game board is dead. Please input again:\n");
+                continue;
+            }else {
+                updateGameBoard(gameBoard1);
+                break;
+            }
+        }
+
+        if (choice == 2){
+            if (isGameBoardDead(gameBoard2)){
+                printf("The chosen game board is dead. Please input again:\n");
+                continue;
+            }else {
+                updateGameBoard(gameBoard2);
+                break;
+            }
+        }
+
+    }
 
 }
 
@@ -134,7 +187,19 @@ void placeCrossByHumanPlayer(int gameBoard1[3][3], int gameBoard2[3][3]) {
 int countNumOfCrosses(int gameBoard[3][3]) {
 
     // TODO: Complete this part
+    int count = 0;
 
+    for (int i = 0; i < 3; i++){
+        for (int j = 0; j < 3; j++){
+
+            if (gameBoard[i][j] == -1){
+                count++;
+            }
+
+        }
+    }
+
+    return count;
 }
 
 
@@ -145,6 +210,99 @@ int countNumOfCrosses(int gameBoard[3][3]) {
 void placeCrossByComputerPlayer(int gameBoard1[3][3], int gameBoard2[3][3]) {
 
     // TODO: Complete this part
+    int checkPoint = 0; // An integer varible to store the smallest/largest unoccupied cell
+
+    printf("Choose the game board:\n");
+
+    if (isGameBoardDead(gameBoard2)){
+        printf("1\n");
+        printf("Choose the cell:\n");
+
+        // Place the cross on the unoccupied cell with the smallest number
+        for (int i = 0; i < 9; i++){
+            if (gameBoard1[(i)/3][(i)%3] != -1){
+                // Store the smallest unoccupied cell
+                if (!checkPoint){
+                    checkPoint = i + 1;
+                }
+
+                gameBoard1[(i)/3][(i)%3] = -1;
+
+                if (isGameBoardDead(gameBoard1)){
+                    gameBoard1[(i)/3][(i)%3] = i+1;
+                    continue;
+                }else {
+                    checkPoint = 0; // Reset the varible as we found the good cell
+                    printf("%d\n", i+1);
+                    return;
+                }
+            }
+        }
+
+        if (checkPoint){
+            gameBoard1[(checkPoint-1)/3][(checkPoint-1)%3] = -1;
+            printf("%d\n", checkPoint);
+        }
+
+    }else if(isGameBoardDead(gameBoard1)){
+        printf("2\n");
+        printf("Choose the cell:\n");
+
+        // Place the cross on the unoccupied cell with the largest number
+        for (int i = 8; i >= 0; i--){
+            if (gameBoard2[(i)/3][(i)%3] != -1){
+                // Store the largest unoccupied cell
+                if (!checkPoint){
+                    checkPoint = i + 1;
+                }
+
+                gameBoard2[(i)/3][(i)%3] = -1;
+
+                if (isGameBoardDead(gameBoard2)){
+                    gameBoard2[(i)/3][(i)%3] = i+1;
+                    continue;
+                }else {
+                    checkPoint = 0; // Reset the varible as we found the good cell
+                    printf("%d\n", i+1);
+                    return;
+                }
+            }
+        }
+
+        if (checkPoint){
+            gameBoard2[(checkPoint-1)/3][(checkPoint-1)%3] = -1;
+            printf("%d\n", checkPoint);
+        }
+
+    }else {
+        if (countNumOfCrosses(gameBoard1) < countNumOfCrosses(gameBoard2)){
+            printf("1\n");
+            printf("Choose the cell:\n");
+
+            // Place the cross on the unoccupied cell with the smallest number
+            for (int i = 0; i < 9; i++){
+                if (gameBoard1[(i)/3][(i)%3] != -1){
+                    gameBoard1[(i)/3][(i)%3] = -1;
+                    printf("%d\n", i+1);
+                    return;
+                }
+            }
+
+        }else {
+            printf("2\n");
+            printf("Choose the cell:\n");
+
+            // Place the cross on the unoccupied cell with the largest number
+            for (int i = 8; i >= 0; i--){
+                if (gameBoard2[(i)/3][(i)%3] != -1){
+                    gameBoard2[(i)/3][(i)%3] = -1;
+                    printf("%d\n", i+1);
+                    return;
+                }
+            }
+
+        }
+    }
 
 }
 
@@ -187,14 +345,49 @@ int main()
 
     // TODO: Complete this part
     if (numOfHumanPlayers == 2){
-        while (!isGameBoardDead){
+        while (!gameEnd){
             printTwoGameBoards(gameBoard1, gameBoard2);
-            printf("# Player 1's turn #\n");
+            
+            printf("# Player %d's turn #\n", currentPlayer);
+
             placeCrossByHumanPlayer(gameBoard1, gameBoard2);
+            currentPlayer = (currentPlayer % 2) + 1;
+
+            if (isGameBoardDead(gameBoard1) && isGameBoardDead(gameBoard2)){
+                gameEnd = 1;
+                printTwoGameBoards(gameBoard1, gameBoard2);
+                printf("Congratulations! Player %d wins!", currentPlayer);
+            }
+
         }
-
     }else if (numOfHumanPlayers == 1){
+        while (!gameEnd){
+            printTwoGameBoards(gameBoard1, gameBoard2);
+            
+            printf("# Player 1's turn #\n");
 
+            placeCrossByHumanPlayer(gameBoard1, gameBoard2);
+
+            if (isGameBoardDead(gameBoard1) && isGameBoardDead(gameBoard2)){
+                gameEnd = 1;
+                printTwoGameBoards(gameBoard1, gameBoard2);
+                printf("Computer wins!");
+                break; // Terminate the program
+            }
+
+            printTwoGameBoards(gameBoard1, gameBoard2);
+            
+            printf("# Computer's turn #\n");
+
+            placeCrossByComputerPlayer(gameBoard1, gameBoard2);
+
+            if (isGameBoardDead(gameBoard1) && isGameBoardDead(gameBoard2)){
+                gameEnd = 1;
+                printTwoGameBoards(gameBoard1, gameBoard2);
+                printf("Congratulations! Player 1 wins!");
+            }
+
+        }
     }
 
 
