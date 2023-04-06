@@ -35,12 +35,11 @@
 void initGameBoard(int gameBoard[3][3]) {
 
     // TODO: Complete this part
-    int i, j, count = 1;
 
-    for (i = 0; i < 3; i++){
-        for (j = 0; j < 3; j++){
-            gameBoard[i][j] = count;
-            count++;
+    // Assign 1-9 to gameBoard with [0][0] being the bottom left cell
+    for (int i = 0; i < 3; i++){
+        for (int j = 0; j < 3; j++){
+            gameBoard[i][j] = i * 3 + j + 1;
         }
     }
 }
@@ -64,7 +63,9 @@ void printGameBoard(int gameBoard[3][3]) {
 
         }
         printf("|\n");
+
     }
+
 }
 
 
@@ -210,10 +211,11 @@ int countNumOfCrosses(int gameBoard[3][3]) {
 void placeCrossByComputerPlayer(int gameBoard1[3][3], int gameBoard2[3][3]) {
 
     // TODO: Complete this part
-    int checkPoint = 0; // An integer varible to store the smallest/largest unoccupied cell
+    int checkPoint = 0; // To store the smallest/largest unoccupied cell
 
     printf("Choose the game board:\n");
 
+    // Case B: game board 2 is dead, game board 1 is chosen
     if (isGameBoardDead(gameBoard2)){
         printf("1\n");
         printf("Choose the cell:\n");
@@ -229,7 +231,7 @@ void placeCrossByComputerPlayer(int gameBoard1[3][3], int gameBoard2[3][3]) {
                 gameBoard1[(i)/3][(i)%3] = -1;
 
                 if (isGameBoardDead(gameBoard1)){
-                    gameBoard1[(i)/3][(i)%3] = i+1;
+                    gameBoard1[(i)/3][(i)%3] = i+1; // Revert the cell
                     continue;
                 }else {
                     checkPoint = 0; // Reset the varible as we found the good cell
@@ -239,11 +241,13 @@ void placeCrossByComputerPlayer(int gameBoard1[3][3], int gameBoard2[3][3]) {
             }
         }
 
+        // Place the cross at checkpoint as no good cell found
         if (checkPoint){
             gameBoard1[(checkPoint-1)/3][(checkPoint-1)%3] = -1;
             printf("%d\n", checkPoint);
         }
 
+    // Case B: game board 1 is dead, game board 2 is chosen
     }else if(isGameBoardDead(gameBoard1)){
         printf("2\n");
         printf("Choose the cell:\n");
@@ -259,7 +263,7 @@ void placeCrossByComputerPlayer(int gameBoard1[3][3], int gameBoard2[3][3]) {
                 gameBoard2[(i)/3][(i)%3] = -1;
 
                 if (isGameBoardDead(gameBoard2)){
-                    gameBoard2[(i)/3][(i)%3] = i+1;
+                    gameBoard2[(i)/3][(i)%3] = i+1; // Revert the cell
                     continue;
                 }else {
                     checkPoint = 0; // Reset the varible as we found the good cell
@@ -269,11 +273,13 @@ void placeCrossByComputerPlayer(int gameBoard1[3][3], int gameBoard2[3][3]) {
             }
         }
 
+        // Place the cross at checkpoint as no good cell found
         if (checkPoint){
             gameBoard2[(checkPoint-1)/3][(checkPoint-1)%3] = -1;
             printf("%d\n", checkPoint);
         }
 
+    // Case A: Both game boards are not dead
     }else {
         if (countNumOfCrosses(gameBoard1) < countNumOfCrosses(gameBoard2)){
             printf("1\n");
@@ -353,6 +359,7 @@ int main()
             placeCrossByHumanPlayer(gameBoard1, gameBoard2);
             currentPlayer = (currentPlayer % 2) + 1;
 
+            // Check if the game has ended
             if (isGameBoardDead(gameBoard1) && isGameBoardDead(gameBoard2)){
                 gameEnd = 1;
                 printTwoGameBoards(gameBoard1, gameBoard2);
@@ -362,25 +369,29 @@ int main()
         }
     }else if (numOfHumanPlayers == 1){
         while (!gameEnd){
+            // Player 1's turn
             printTwoGameBoards(gameBoard1, gameBoard2);
             
             printf("# Player 1's turn #\n");
 
             placeCrossByHumanPlayer(gameBoard1, gameBoard2);
 
+            // Check if the game has ended after P1's move
             if (isGameBoardDead(gameBoard1) && isGameBoardDead(gameBoard2)){
                 gameEnd = 1;
                 printTwoGameBoards(gameBoard1, gameBoard2);
                 printf("Computer wins!");
-                break; // Terminate the program
+                break; // Terminate the program immediately
             }
 
+            // Computer's turn
             printTwoGameBoards(gameBoard1, gameBoard2);
             
             printf("# Computer's turn #\n");
 
             placeCrossByComputerPlayer(gameBoard1, gameBoard2);
 
+            // Check if the game has ended after Computer's move
             if (isGameBoardDead(gameBoard1) && isGameBoardDead(gameBoard2)){
                 gameEnd = 1;
                 printTwoGameBoards(gameBoard1, gameBoard2);
