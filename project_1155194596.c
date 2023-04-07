@@ -132,7 +132,7 @@ void updateGameBoard(int gameBoard[3][3]) {
             printf("The chosen cell is occupied. Please input again:\n");
             continue;
         }else {
-            gameBoard[(choice-1)/3][(choice-1)%3] = -1;
+            gameBoard[(choice-1)/3][(choice-1)%3] = -1; // Place cross on chosen cell
             break;
         }
 
@@ -223,6 +223,7 @@ void placeCrossByComputerPlayer(int gameBoard1[3][3], int gameBoard2[3][3]) {
         // Place the cross on the unoccupied cell with the smallest number
         for (int i = 0; i < 9; i++){
             if (gameBoard1[(i)/3][(i)%3] != -1){
+                
                 // Store the smallest unoccupied cell
                 if (!checkPoint){
                     checkPoint = i + 1;
@@ -241,7 +242,7 @@ void placeCrossByComputerPlayer(int gameBoard1[3][3], int gameBoard2[3][3]) {
             }
         }
 
-        // Place the cross at checkpoint as no good cell found
+        // Place the cross at checkpoint if no good cell found
         if (checkPoint){
             gameBoard1[(checkPoint-1)/3][(checkPoint-1)%3] = -1;
             printf("%d\n", checkPoint);
@@ -255,6 +256,7 @@ void placeCrossByComputerPlayer(int gameBoard1[3][3], int gameBoard2[3][3]) {
         // Place the cross on the unoccupied cell with the largest number
         for (int i = 8; i >= 0; i--){
             if (gameBoard2[(i)/3][(i)%3] != -1){
+
                 // Store the largest unoccupied cell
                 if (!checkPoint){
                     checkPoint = i + 1;
@@ -273,7 +275,7 @@ void placeCrossByComputerPlayer(int gameBoard1[3][3], int gameBoard2[3][3]) {
             }
         }
 
-        // Place the cross at checkpoint as no good cell found
+        // Place the cross at checkpoint if no good cell found
         if (checkPoint){
             gameBoard2[(checkPoint-1)/3][(checkPoint-1)%3] = -1;
             printf("%d\n", checkPoint);
