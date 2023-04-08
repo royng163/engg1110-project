@@ -232,11 +232,11 @@ void placeCrossByComputerPlayer(int gameBoard1[3][3], int gameBoard2[3][3]) {
                 gameBoard1[(i)/3][(i)%3] = -1;
 
                 if (isGameBoardDead(gameBoard1)){
-                    gameBoard1[(i)/3][(i)%3] = i+1; // Revert the cell
+                    gameBoard1[(i)/3][(i)%3] = i + 1; // Revert the cell
                     continue;
                 }else {
                     checkPoint = 0; // Reset the varible as we found the good cell
-                    printf("%d\n", i+1);
+                    printf("%d\n", i + 1);
                     return;
                 }
             }
@@ -265,11 +265,11 @@ void placeCrossByComputerPlayer(int gameBoard1[3][3], int gameBoard2[3][3]) {
                 gameBoard2[(i)/3][(i)%3] = -1;
 
                 if (isGameBoardDead(gameBoard2)){
-                    gameBoard2[(i)/3][(i)%3] = i+1; // Revert the cell
+                    gameBoard2[(i)/3][(i)%3] = i + 1; // Revert the cell
                     continue;
                 }else {
                     checkPoint = 0; // Reset the varible as we found the good cell
-                    printf("%d\n", i+1);
+                    printf("%d\n", i + 1);
                     return;
                 }
             }
@@ -291,7 +291,7 @@ void placeCrossByComputerPlayer(int gameBoard1[3][3], int gameBoard2[3][3]) {
             for (int i = 0; i < 9; i++){
                 if (gameBoard1[(i)/3][(i)%3] != -1){
                     gameBoard1[(i)/3][(i)%3] = -1;
-                    printf("%d\n", i+1);
+                    printf("%d\n", i + 1);
                     return;
                 }
             }
@@ -304,7 +304,7 @@ void placeCrossByComputerPlayer(int gameBoard1[3][3], int gameBoard2[3][3]) {
             for (int i = 8; i >= 0; i--){
                 if (gameBoard2[(i)/3][(i)%3] != -1){
                     gameBoard2[(i)/3][(i)%3] = -1;
-                    printf("%d\n", i+1);
+                    printf("%d\n", i + 1);
                     return;
                 }
             }
