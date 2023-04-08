@@ -37,10 +37,8 @@ void initGameBoard(int gameBoard[3][3]) {
     // TODO: Complete this part
 
     // Assign 1-9 to gameBoard with [0][0] being the bottom left cell
-    for (int i = 0; i < 3; i++){
-        for (int j = 0; j < 3; j++){
-            gameBoard[i][j] = i * 3 + j + 1;
-        }
+    for (int i = 0; i < 9; i++){
+        gameBoard[(i)/3][(i)%3] = i + 1;
     }
 }
 
@@ -87,18 +85,18 @@ int isGameBoardDead(int gameBoard[3][3]){
 
     // TODO: Complete this part
     for (int i = 0; i < 3; i++){
-        // Checks rows
+        // Check rows
         if (gameBoard[i][0] == gameBoard[i][1] && gameBoard[i][1] == gameBoard[i][2]){
             return 1;
         }
         
-        // Checks columns
+        // Check columns
         if (gameBoard[0][i] == gameBoard[1][i] && gameBoard[1][i] == gameBoard[2][i]){
             return 1;
         }
     }
 
-    // Checks diagonals
+    // Check diagonals
     if (gameBoard[0][0] == gameBoard[1][1] && gameBoard[1][1] == gameBoard[2][2]){
         return 1;
     }
@@ -190,13 +188,9 @@ int countNumOfCrosses(int gameBoard[3][3]) {
     // TODO: Complete this part
     int count = 0;
 
-    for (int i = 0; i < 3; i++){
-        for (int j = 0; j < 3; j++){
-
-            if (gameBoard[i][j] == -1){
-                count++;
-            }
-
+    for (int i = 0; i < 9; i++){
+        if (gameBoard[(i)/3][(i)%3] == -1){
+            count++;
         }
     }
 
@@ -235,14 +229,14 @@ void placeCrossByComputerPlayer(int gameBoard1[3][3], int gameBoard2[3][3]) {
                     gameBoard1[(i)/3][(i)%3] = i + 1; // Revert the cell
                     continue;
                 }else {
-                    checkPoint = 0; // Reset the varible as we found the good cell
+                    checkPoint = 0; // Reset the varible as the cell that don't cause death is found
                     printf("%d\n", i + 1);
                     return;
                 }
             }
         }
 
-        // Place the cross at checkpoint if no good cell found
+        // Place the cross at checkpoint if all cells cause death
         if (checkPoint){
             gameBoard1[(checkPoint-1)/3][(checkPoint-1)%3] = -1;
             printf("%d\n", checkPoint);
@@ -268,14 +262,14 @@ void placeCrossByComputerPlayer(int gameBoard1[3][3], int gameBoard2[3][3]) {
                     gameBoard2[(i)/3][(i)%3] = i + 1; // Revert the cell
                     continue;
                 }else {
-                    checkPoint = 0; // Reset the varible as we found the good cell
+                    checkPoint = 0; // Reset the varible as the cell that don't cause death is found
                     printf("%d\n", i + 1);
                     return;
                 }
             }
         }
 
-        // Place the cross at checkpoint if no good cell found
+        // Place the cross at checkpoint if all cells cause death
         if (checkPoint){
             gameBoard2[(checkPoint-1)/3][(checkPoint-1)%3] = -1;
             printf("%d\n", checkPoint);
