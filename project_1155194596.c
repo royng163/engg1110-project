@@ -215,7 +215,7 @@ void placeCrossByComputerPlayer(int gameBoard1[3][3], int gameBoard2[3][3]) {
 
     printf("Choose the game board:\n");
 
-    // Case B: game board 2 is dead, game board 1 is chosen
+    // Case B: Game board 2 is dead, game board 1 is chosen
     if (isGameBoardDead(gameBoard2)){
         printf("1\n");
         printf("Choose the cell:\n");
@@ -226,7 +226,7 @@ void placeCrossByComputerPlayer(int gameBoard1[3][3], int gameBoard2[3][3]) {
                 
                 // Store the smallest unoccupied cell
                 if (!checkPoint){
-                    checkPoint = i + 1;
+                    checkPoint = i;
                 }
 
                 gameBoard1[(i)/3][(i)%3] = -1;
@@ -244,11 +244,11 @@ void placeCrossByComputerPlayer(int gameBoard1[3][3], int gameBoard2[3][3]) {
 
         // Place the cross at checkpoint if no good cell found
         if (checkPoint){
-            gameBoard1[(checkPoint-1)/3][(checkPoint-1)%3] = -1;
-            printf("%d\n", checkPoint);
+            gameBoard1[(checkPoint)/3][(checkPoint)%3] = -1;
+            printf("%d\n", checkPoint + 1);
         }
 
-    // Case B: game board 1 is dead, game board 2 is chosen
+    // Case B: Game board 1 is dead, game board 2 is chosen
     }else if(isGameBoardDead(gameBoard1)){
         printf("2\n");
         printf("Choose the cell:\n");
@@ -259,7 +259,7 @@ void placeCrossByComputerPlayer(int gameBoard1[3][3], int gameBoard2[3][3]) {
 
                 // Store the largest unoccupied cell
                 if (!checkPoint){
-                    checkPoint = i + 1;
+                    checkPoint = i;
                 }
 
                 gameBoard2[(i)/3][(i)%3] = -1;
@@ -277,8 +277,8 @@ void placeCrossByComputerPlayer(int gameBoard1[3][3], int gameBoard2[3][3]) {
 
         // Place the cross at checkpoint if no good cell found
         if (checkPoint){
-            gameBoard2[(checkPoint-1)/3][(checkPoint-1)%3] = -1;
-            printf("%d\n", checkPoint);
+            gameBoard2[(checkPoint)/3][(checkPoint)%3] = -1;
+            printf("%d\n", checkPoint + 1);
         }
 
     // Case A: Both game boards are not dead
